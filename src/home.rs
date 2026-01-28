@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{devices::Device, home::room::Room};
+use crate::{Reportable, devices::Device, home::room::Room};
 
 pub mod room;
 
@@ -67,8 +67,10 @@ impl Home {
 
         Ok(device)
     }
+}
 
-    pub fn report(&self) {
+impl Reportable for Home {
+    fn report(&self) {
         println!("Дом - {}", self.name);
 
         self.rooms.iter().for_each(|(_, r)| r.report());

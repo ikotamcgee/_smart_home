@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::devices::Device;
+use crate::{Reportable, devices::Device};
 
 #[derive(Debug)]
 pub struct Room {
@@ -53,8 +53,10 @@ impl Room {
     pub fn remove_device(&mut self, device_name: &str) {
         self.devices.remove(device_name);
     }
+}
 
-    pub fn report(&self) {
+impl Reportable for Room {
+    fn report(&self) {
         println!("Комната - {}", self.name);
 
         self.devices.iter().for_each(|(_, d)| d.report());

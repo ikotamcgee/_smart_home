@@ -1,3 +1,5 @@
+use crate::Reportable;
+
 #[derive(Debug)]
 pub struct Socket {
     name: String,
@@ -40,5 +42,22 @@ impl Socket {
 
     pub fn power(&self) -> f64 {
         if self.is_on { self.power } else { 0.0 }
+    }
+}
+
+impl Reportable for Socket {
+    fn report(&self) {
+        println!(
+            "Розетка: {}\n\
+            Состояние: {}\n\
+			Текущая мощность: {}",
+            self.name(),
+            if self.is_on() {
+                "включена"
+            } else {
+                "выключена"
+            },
+            self.power()
+        );
     }
 }

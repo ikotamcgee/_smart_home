@@ -1,3 +1,5 @@
+use crate::Reportable;
+
 #[derive(Debug)]
 pub struct Thermometer {
     name: String,
@@ -26,5 +28,16 @@ impl Thermometer {
 
     pub fn set_temperature(&mut self, value: f64) {
         self.temperature = value
+    }
+}
+
+impl Reportable for Thermometer {
+    fn report(&self) {
+        println!(
+            "Термометр: {}\n\
+            Температура: {}",
+            self.name(),
+            self.temperature()
+        );
     }
 }
