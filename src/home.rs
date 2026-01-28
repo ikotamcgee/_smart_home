@@ -40,29 +40,29 @@ impl Home {
         self.name = value.into()
     }
 
-    pub fn add_room(&mut self, name_room: &str, room: Room) {
-        self.rooms.insert(name_room.into(), room);
+    pub fn add_room(&mut self, room_name: &str, room: Room) {
+        self.rooms.insert(room_name.into(), room);
     }
 
-    pub fn room(&self, name_room: &str) -> Option<&Room> {
-        self.rooms.get(name_room)
+    pub fn room(&self, room_name: &str) -> Option<&Room> {
+        self.rooms.get(room_name)
     }
 
-    pub fn room_mut(&mut self, name_room: &str) -> Option<&mut Room> {
-        self.rooms.get_mut(name_room)
+    pub fn room_mut(&mut self, room_name: &str) -> Option<&mut Room> {
+        self.rooms.get_mut(room_name)
     }
 
-    pub fn remove_room(&mut self, name_room: &str) {
-        self.rooms.remove(name_room);
+    pub fn remove_room(&mut self, room_name: &str) {
+        self.rooms.remove(room_name);
     }
 
-    pub fn device(&self, name_room: &str, name_device: &str) -> Result<&Device, HomeError> {
-        let room = self.room(name_room).ok_or_else(|| {
-            HomeError::RoomNotFound(format!("Комната с таким именем {} не найдена.", name_room))
+    pub fn device(&self, room_name: &str, device_name: &str) -> Result<&Device, HomeError> {
+        let room = self.room(room_name).ok_or_else(|| {
+            HomeError::RoomNotFound(format!("Комната с таким именем {} не найдена.", room_name))
         })?;
 
-        let device = room.device(name_device).ok_or_else(|| {
-            HomeError::DeviceNotFound(format!("Девайс с таким именем {} не найден.", name_device))
+        let device = room.device(device_name).ok_or_else(|| {
+            HomeError::DeviceNotFound(format!("Девайс с таким именем {} не найден.", device_name))
         })?;
 
         Ok(device)

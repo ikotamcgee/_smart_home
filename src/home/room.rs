@@ -24,20 +24,20 @@ impl Room {
         self.name = value.into()
     }
 
-    pub fn add_device(&mut self, name_device: &str, device: Device) {
-        self.devices.insert(name_device.into(), device);
+    pub fn add_device(&mut self, device_name: &str, device: Device) {
+        self.devices.insert(device_name.into(), device);
     }
 
-    pub fn device(&self, name_device: &str) -> Option<&Device> {
-        self.devices.get(name_device)
+    pub fn device(&self, device_name: &str) -> Option<&Device> {
+        self.devices.get(device_name)
     }
 
-    pub fn device_mut(&mut self, name_device: &str) -> Option<&mut Device> {
-        self.devices.get_mut(name_device)
+    pub fn device_mut(&mut self, device_name: &str) -> Option<&mut Device> {
+        self.devices.get_mut(device_name)
     }
 
-    pub fn remove_device(&mut self, name_device: &str) {
-        self.devices.remove(name_device);
+    pub fn remove_device(&mut self, device_name: &str) {
+        self.devices.remove(device_name);
     }
 
     pub fn report(&self) {
