@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct Socket {
     name: String,
     is_on: bool,

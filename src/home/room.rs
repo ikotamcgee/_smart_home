@@ -1,5 +1,6 @@
 use crate::devices::Device;
 
+#[derive(Debug)]
 pub struct Room {
     name: String,
     devices: Vec<Device>,

@@ -2,6 +2,7 @@ use crate::home::room::Room;
 
 pub mod room;
 
+#[derive(Debug)]
 pub struct Home {
     name: String,
     rooms: Vec<Room>,

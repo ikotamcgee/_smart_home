@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct Thermometer {
     name: String,
     temperature: f64,

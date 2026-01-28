@@ -3,6 +3,7 @@ use crate::devices::{socket::Socket, thermometer::Thermometer};
 pub mod socket;
 pub mod thermometer;
 
+#[derive(Debug)]
 pub enum Device {
     Thermometer(Thermometer),
     Socket(Socket),
