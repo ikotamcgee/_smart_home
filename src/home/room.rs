@@ -1,16 +1,18 @@
+use std::collections::HashMap;
+
 use crate::devices::Device;
 
 #[derive(Debug)]
 pub struct Room {
     name: String,
-    devices: Vec<Device>,
+    devices: HashMap<String, Device>,
 }
 
 impl Room {
     pub fn new(name: &str) -> Self {
         Self {
             name: name.into(),
-            devices: Vec::with_capacity(10),
+            devices: HashMap::with_capacity(10),
         }
     }
 
@@ -22,25 +24,25 @@ impl Room {
         self.name = value.into()
     }
 
-    pub fn add_device(&mut self, device: Device) {
-        self.devices.push(device);
+    pub fn add_device(&mut self, name_device: &str, device: Device) {
+        self.devices.insert(name_device.into(), device);
     }
 
     pub fn device(&self, name_device: &str) -> Option<&Device> {
-        self.devices.iter().find(|d| d.name() == name_device)
+        self.devices.get(name_device)
     }
 
     pub fn device_mut(&mut self, name_device: &str) -> Option<&mut Device> {
-        self.devices.iter_mut().find(|d| d.name() == name_device)
+        self.devices.get_mut(name_device)
     }
 
     pub fn remove_device(&mut self, name_device: &str) {
-        self.devices.retain(|d| d.name() != name_device);
+        self.devices.remove(name_device);
     }
 
     pub fn report(&self) {
         println!("Комната - {}", self.name);
 
-        self.devices.iter().for_each(|d| d.report());
+        self.devices.iter().for_each(|(_, d)| d.report());
     }
 }
