@@ -8,6 +8,20 @@ pub struct Room {
     devices: HashMap<String, Device>,
 }
 
+macro_rules! room {
+    ($room_name:expr, $($device_name:expr => $device:expr),* $(,)?) => {
+        {
+            let mut r = $crate::Room::new($room_name);
+
+            $(
+                r.add_device($device_name, $device.into());
+            )*
+
+            r
+        }
+    };
+}
+
 impl Room {
     pub fn new(name: &str) -> Self {
         Self {
