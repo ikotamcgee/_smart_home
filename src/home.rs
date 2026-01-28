@@ -12,7 +12,10 @@ pub enum HomeError {
 
 impl std::fmt::Display for HomeError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self)
+        match self {
+            Self::DeviceNotFound(msg) => write!(f, "{}", msg),
+            Self::RoomNotFound(msg) => write!(f, "{}", msg),
+        }
     }
 }
 
@@ -40,8 +43,8 @@ impl Home {
         self.name = value.into()
     }
 
-    pub fn add_room(&mut self, room_name: &str, room: Room) {
-        self.rooms.insert(room_name.into(), room);
+    pub fn add_room(&mut self, room: Room) {
+        self.rooms.insert(room.name().into(), room);
     }
 
     pub fn room(&self, room_name: &str) -> Option<&Room> {
