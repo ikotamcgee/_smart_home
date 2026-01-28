@@ -5,6 +5,20 @@ use crate::home::room::Room;
 pub mod room;
 
 #[derive(Debug)]
+pub enum HomeError {
+    DeviceNotFound(String),
+    RoomNotFound(String),
+}
+
+impl std::fmt::Display for HomeError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self)
+    }
+}
+
+impl std::error::Error for HomeError {}
+
+#[derive(Debug)]
 pub struct Home {
     name: String,
     rooms: HashMap<String, Room>,
