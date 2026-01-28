@@ -9,6 +9,18 @@ pub enum Device {
     Socket(Socket),
 }
 
+impl From<Thermometer> for Device {
+    fn from(value: Thermometer) -> Self {
+        Device::Thermometer(value)
+    }
+}
+
+impl From<Socket> for Device {
+    fn from(value: Socket) -> Self {
+        Device::Socket(value)
+    }
+}
+
 impl Device {
     pub fn report(&self) {
         match self {
