@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::home::room::Room;
 
 pub mod room;
@@ -5,14 +7,14 @@ pub mod room;
 #[derive(Debug)]
 pub struct Home {
     name: String,
-    rooms: Vec<Room>,
+    rooms: HashMap<String, Room>,
 }
 
 impl Home {
     pub fn new(name: &str) -> Self {
         Self {
             name: name.into(),
-            rooms: Vec::with_capacity(10),
+            rooms: HashMap::with_capacity(10),
         }
     }
 
@@ -25,24 +27,24 @@ impl Home {
     }
 
     pub fn add_room(&mut self, room: Room) {
-        self.rooms.push(room);
+        self.rooms.insert(room.name().into(), room);
     }
 
     pub fn room(&self, name_room: &str) -> Option<&Room> {
-        self.rooms.iter().find(|r| r.name() == name_room)
+        self.rooms.get(name_room)
     }
 
     pub fn room_mut(&mut self, name_room: &str) -> Option<&mut Room> {
-        self.rooms.iter_mut().find(|r| r.name() == name_room)
+        self.rooms.get_mut(name_room)
     }
 
     pub fn remove_room(&mut self, name_room: &str) {
-        self.rooms.retain(|r| r.name() != name_room);
+        self.rooms.remove(name_room);
     }
 
     pub fn report(&self) {
         println!("Дом - {}", self.name);
 
-        self.rooms.iter().for_each(|r| r.report());
+        self.rooms.iter().for_each(|(_, r)| r.report());
     }
 }
