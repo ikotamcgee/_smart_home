@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::home::room::Room;
+use crate::{devices::Device, home::room::Room};
 
 pub mod room;
 
@@ -54,6 +54,18 @@ impl Home {
 
     pub fn remove_room(&mut self, name_room: &str) {
         self.rooms.remove(name_room);
+    }
+
+    pub fn device(&self, name_room: &str, name_device: &str) -> Result<&Device, HomeError> {
+        let room = self.room(name_room).ok_or_else(|| {
+            HomeError::RoomNotFound(format!("Комната с таким именем {} не найдена.", name_room))
+        })?;
+
+        let device = room.device(name_device).ok_or_else(|| {
+            HomeError::DeviceNotFound(format!("Девайс с таким именем {} не найден.", name_device))
+        })?;
+
+        Ok(device)
     }
 
     pub fn report(&self) {
