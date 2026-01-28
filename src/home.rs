@@ -40,8 +40,8 @@ impl Home {
         self.name = value.into()
     }
 
-    pub fn add_room(&mut self, room: Room) {
-        self.rooms.insert(room.name().into(), room);
+    pub fn add_room(&mut self, name_room: &str, room: Room) {
+        self.rooms.insert(name_room.into(), room);
     }
 
     pub fn room(&self, name_room: &str) -> Option<&Room> {

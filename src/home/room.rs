@@ -24,8 +24,8 @@ impl Room {
         self.name = value.into()
     }
 
-    pub fn add_device(&mut self, device: Device) {
-        self.devices.insert(device.name().into(), device);
+    pub fn add_device(&mut self, name_device: &str, device: Device) {
+        self.devices.insert(name_device.into(), device);
     }
 
     pub fn device(&self, name_device: &str) -> Option<&Device> {
