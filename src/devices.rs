@@ -9,11 +9,11 @@ pub enum Device {
 }
 
 impl Device {
-    fn report(&self) {
+    pub fn report(&self) {
         match self {
             Self::Thermometer(t) => {
                 println!(
-                    "Термометр {}\n
+                    "Термометр: {}\n\
                     Температура: {}",
                     t.name(),
                     t.temperature()
@@ -21,8 +21,8 @@ impl Device {
             }
             Self::Socket(s) => {
                 println!(
-                    "Розетка {}\n
-                    Состояние: {}\n
+                    "Розетка: {}\n\
+                    Состояние: {}\n\
 					Текущая мощность: {}",
                     s.name(),
                     if s.is_on() {
@@ -33,6 +33,13 @@ impl Device {
                     s.power()
                 );
             }
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        match self {
+            Self::Socket(s) => s.name(),
+            Self::Thermometer(t) => t.name(),
         }
     }
 }
