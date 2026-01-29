@@ -1,8 +1,3 @@
-use crate::{
-    devices::{Device, socket::Socket, thermometer::Thermometer},
-    home::Home,
-};
-
 mod devices;
 mod home;
 

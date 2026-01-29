@@ -32,3 +32,33 @@ impl Reportable for Device {
         }
     }
 }
+
+impl Device {
+    pub fn as_thermometer(&self) -> Option<&Thermometer> {
+        match self {
+            Self::Thermometer(t) => Some(t),
+            _ => None,
+        }
+    }
+
+    pub fn as_thermometer_mut(&mut self) -> Option<&mut Thermometer> {
+        match self {
+            Self::Thermometer(t) => Some(t),
+            _ => None,
+        }
+    }
+
+    pub fn as_socket(&self) -> Option<&Socket> {
+        match self {
+            Self::Socket(t) => Some(t),
+            _ => None,
+        }
+    }
+
+    pub fn as_socket_mut(&mut self) -> Option<&mut Socket> {
+        match self {
+            Self::Socket(t) => Some(t),
+            _ => None,
+        }
+    }
+}
