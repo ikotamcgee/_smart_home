@@ -12,7 +12,7 @@ pub struct Room {
 macro_rules! room {
     ($room_name:expr, $($device_name:expr => $device:expr),* $(,)?) => {
         {
-            let mut r = crate::home::room::Room::new($room_name);
+            let mut r = $crate::home::room::Room::new($room_name);
 
             $(
                 r.add_device($device_name, $device.into());

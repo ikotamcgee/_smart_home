@@ -1,3 +1,4 @@
+#![allow(unused)]
 use crate::{
     devices::{Device, socket::Socket, thermometer::Thermometer},
     home::{Home, room::Room},
