@@ -27,6 +27,14 @@ pub struct Home {
     rooms: HashMap<String, Room>,
 }
 
+impl Reportable for Home {
+    fn report(&self) {
+        println!("Дом - {}", self.name);
+
+        self.rooms.iter().for_each(|(_, r)| r.report());
+    }
+}
+
 impl Home {
     pub fn new(name: &str) -> Self {
         Self {
@@ -70,12 +78,20 @@ impl Home {
 
         Ok(device)
     }
-}
 
-impl Reportable for Home {
-    fn report(&self) {
-        println!("Дом - {}", self.name);
+    pub fn device_mut(
+        &mut self,
+        room_name: &str,
+        device_name: &str,
+    ) -> Result<&mut Device, HomeError> {
+        let room = self.room_mut(room_name).ok_or_else(|| {
+            HomeError::RoomNotFound(format!("Комната с таким именем {} не найдена.", room_name))
+        })?;
 
-        self.rooms.iter().for_each(|(_, r)| r.report());
+        let device = room.device_mut(device_name).ok_or_else(|| {
+            HomeError::DeviceNotFound(format!("Девайс с таким именем {} не найден.", device_name))
+        })?;
+
+        Ok(device)
     }
 }

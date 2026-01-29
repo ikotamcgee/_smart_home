@@ -23,6 +23,14 @@ macro_rules! room {
     };
 }
 
+impl Reportable for Room {
+    fn report(&self) {
+        println!("Комната - {}", self.name);
+
+        self.devices.iter().for_each(|(_, d)| d.report());
+    }
+}
+
 impl Room {
     pub fn new(name: &str) -> Self {
         Self {
@@ -53,13 +61,5 @@ impl Room {
 
     pub fn remove_device(&mut self, device_name: &str) {
         self.devices.remove(device_name);
-    }
-}
-
-impl Reportable for Room {
-    fn report(&self) {
-        println!("Комната - {}", self.name);
-
-        self.devices.iter().for_each(|(_, d)| d.report());
     }
 }

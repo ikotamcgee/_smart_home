@@ -6,6 +6,17 @@ pub struct Thermometer {
     temperature: f64,
 }
 
+impl Reportable for Thermometer {
+    fn report(&self) {
+        println!(
+            "Термометр: {}\n\
+            Температура: {}",
+            self.name(),
+            self.temperature()
+        );
+    }
+}
+
 impl Thermometer {
     pub fn new(name: &str) -> Self {
         Self {
@@ -28,16 +39,5 @@ impl Thermometer {
 
     pub fn set_temperature(&mut self, value: f64) {
         self.temperature = value
-    }
-}
-
-impl Reportable for Thermometer {
-    fn report(&self) {
-        println!(
-            "Термометр: {}\n\
-            Температура: {}",
-            self.name(),
-            self.temperature()
-        );
     }
 }

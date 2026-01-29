@@ -7,6 +7,23 @@ pub struct Socket {
     power: f64,
 }
 
+impl Reportable for Socket {
+    fn report(&self) {
+        println!(
+            "Розетка: {}\n\
+            Состояние: {}\n\
+			Текущая мощность: {}",
+            self.name(),
+            if self.is_on() {
+                "включена"
+            } else {
+                "выключена"
+            },
+            self.power()
+        );
+    }
+}
+
 impl Socket {
     pub fn new(name: &str) -> Self {
         Self {
@@ -42,22 +59,5 @@ impl Socket {
 
     pub fn power(&self) -> f64 {
         if self.is_on { self.power } else { 0.0 }
-    }
-}
-
-impl Reportable for Socket {
-    fn report(&self) {
-        println!(
-            "Розетка: {}\n\
-            Состояние: {}\n\
-			Текущая мощность: {}",
-            self.name(),
-            if self.is_on() {
-                "включена"
-            } else {
-                "выключена"
-            },
-            self.power()
-        );
     }
 }
